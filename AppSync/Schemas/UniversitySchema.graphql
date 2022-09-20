@@ -1,0 +1,361 @@
+﻿schema {
+  query: Query
+  mutation: Mutation
+  subscription: Subscription
+}
+
+type Asignatura {
+  creditos: Int
+  id: ID!
+  nombre: String
+}
+
+type AsignaturaConnection {
+  items: [Asignatura]
+  nextToken: String
+}
+
+type Curso {
+  asignatura_id: Int
+  id: ID!
+  profesor_id: Int
+}
+
+type CursoConnection {
+  items: [Curso]
+  nextToken: String
+}
+
+type Decano {
+  apellido: String
+  id: ID!
+  nombre: String
+}
+
+type DecanoConnection {
+  items: [Decano]
+  nextToken: String
+}
+
+type Estudiante {
+  apellido: String
+  direccion: String
+  id: ID!
+  nombre: String
+}
+
+type EstudianteConnection {
+  items: [Estudiante]
+  nextToken: String
+}
+
+type Facultad {
+  decano_id: Int
+  id: ID!
+  nombre: String
+  ubicacion: String
+}
+
+type FacultadConnection {
+  items: [Facultad]
+  nextToken: String
+}
+
+type Matricula {
+  asignatura_id: Int
+  estudiante_id: Int
+  id: ID!
+}
+
+type MatriculaConnection {
+  items: [Matricula]
+  nextToken: String
+}
+
+type Mutation {
+  createAsignatura(input: CreateAsignaturaInput!): Asignatura
+  createCurso(input: CreateCursoInput!): Curso
+  createDecano(input: CreateDecanoInput!): Decano
+  createEstudiante(input: CreateEstudianteInput!): Estudiante
+  createFacultad(input: CreateFacultadInput!): Facultad
+  createMatricula(input: CreateMatriculaInput!): Matricula
+  createProfesor(input: CreateProfesorInput!): Profesor
+  deleteAsignatura(input: DeleteAsignaturaInput!): String
+  deleteCurso(input: DeleteCursoInput!): String
+  deleteDecano(input: DeleteDecanoInput!): String
+  deleteEstudiante(input: DeleteEstudianteInput!): String
+  deleteFacultad(input: DeleteFacultadInput!): String
+  deleteMatricula(input: DeleteMatriculaInput!): String
+  deleteProfesor(input: DeleteProfesorInput!): String
+  updateAsignatura(input: UpdateAsignaturaInput!): Asignatura
+  updateCurso(input: UpdateCursoInput!): Curso
+  updateDecano(input: UpdateDecanoInput!): Decano
+  updateEstudiante(input: UpdateEstudianteInput!): Estudiante
+  updateFacultad(input: UpdateFacultadInput!): Facultad
+  updateMatricula(input: UpdateMatriculaInput!): Matricula
+  updateProfesor(input: UpdateProfesorInput!): Profesor
+}
+
+type Profesor {
+  apellido: String
+  facultad_id: Int
+  id: ID!
+  nombre: String
+}
+
+type ProfesorConnection {
+  items: [Profesor]
+  nextToken: String
+}
+
+type Query {
+  getAsignatura(id: ID!): Asignatura
+  getCurso(id: ID!): Curso
+  getDecano(id: ID!): Decano
+  getEstudiante(id: ID!): Estudiante
+  getFacultad(id: ID!): Facultad
+  getMatricula(id: ID!): Matricula
+  getProfesor(id: ID!): Profesor
+  listAsignaturas(filter: TableAsignaturaFilterInput, limit: Int, nextToken: String): AsignaturaConnection
+  listCursos(filter: TableCursoFilterInput, limit: Int, nextToken: String): CursoConnection
+  listDecanos(filter: TableDecanoFilterInput, limit: Int, nextToken: String): DecanoConnection
+  listEstudiantes(filter: TableEstudianteFilterInput, limit: Int, nextToken: String): EstudianteConnection
+  listFacultads(filter: TableFacultadFilterInput, limit: Int, nextToken: String): FacultadConnection
+  listMatriculas(filter: TableMatriculaFilterInput, limit: Int, nextToken: String): MatriculaConnection
+  listProfesors(filter: TableProfesorFilterInput, limit: Int, nextToken: String): ProfesorConnection
+}
+
+type Subscription {
+  onCreateAsignatura(creditos: Int, id: ID, nombre: String): Asignatura @aws_subscribe(mutations : ["createAsignatura"])
+  onCreateCurso(ASIGNATURA_ID: Int, PROFESOR_ID: Int, id: ID): Curso @aws_subscribe(mutations : ["createCurso"])
+  onCreateDecano(APELLIDO: String, NOMBRE: String, id: ID): Decano @aws_subscribe(mutations : ["createDecano"])
+  onCreateEstudiante(APELLIDO: String, DIRECCION: String, NOMBRE: String, id: ID): Estudiante @aws_subscribe(mutations : ["createEstudiante"])
+  onCreateFacultad(Decano_id: Int, id: ID, nombre: String, ubicacion: String): Facultad @aws_subscribe(mutations : ["createFacultad"])
+  onCreateMatricula(ASIGNATURA_ID: Int, ESTUDIANTE_ID: Int, id: ID): Matricula @aws_subscribe(mutations : ["createMatricula"])
+  onCreateProfesor(APELLIDO: String, FACULTAD_ID: Int, NOMBRE: String, id: ID): Profesor @aws_subscribe(mutations : ["createProfesor"])
+  onDeleteAsignatura(creditos: Int, id: ID, nombre: String): String @aws_subscribe(mutations : ["deleteAsignatura"])
+  onDeleteCurso(ASIGNATURA_ID: Int, PROFESOR_ID: Int, id: ID): String @aws_subscribe(mutations : ["deleteCurso"])
+  onDeleteDecano(APELLIDO: String, NOMBRE: String, id: ID): String @aws_subscribe(mutations : ["deleteDecano"])
+  onDeleteEstudiante(APELLIDO: String, DIRECCION: String, NOMBRE: String, id: ID): String @aws_subscribe(mutations : ["deleteEstudiante"])
+  onDeleteFacultad(Decano_id: Int, id: ID, nombre: String, ubicacion: String): String @aws_subscribe(mutations : ["deleteFacultad"])
+  onDeleteMatricula(ASIGNATURA_ID: Int, ESTUDIANTE_ID: Int, id: ID): String @aws_subscribe(mutations : ["deleteMatricula"])
+  onDeleteProfesor(APELLIDO: String, FACULTAD_ID: Int, NOMBRE: String, id: ID): String @aws_subscribe(mutations : ["deleteProfesor"])
+  onUpdateAsignatura(creditos: Int, id: ID, nombre: String): Asignatura @aws_subscribe(mutations : ["updateAsignatura"])
+  onUpdateCurso(ASIGNATURA_ID: Int, PROFESOR_ID: Int, id: ID): Curso @aws_subscribe(mutations : ["updateCurso"])
+  onUpdateDecano(APELLIDO: String, NOMBRE: String, id: ID): Decano @aws_subscribe(mutations : ["updateDecano"])
+  onUpdateEstudiante(APELLIDO: String, DIRECCION: String, NOMBRE: String, id: ID): Estudiante @aws_subscribe(mutations : ["updateEstudiante"])
+  onUpdateFacultad(Decano_id: Int, id: ID, nombre: String, ubicacion: String): Facultad @aws_subscribe(mutations : ["updateFacultad"])
+  onUpdateMatricula(ASIGNATURA_ID: Int, ESTUDIANTE_ID: Int, id: ID): Matricula @aws_subscribe(mutations : ["updateMatricula"])
+  onUpdateProfesor(APELLIDO: String, FACULTAD_ID: Int, NOMBRE: String, id: ID): Profesor @aws_subscribe(mutations : ["updateProfesor"])
+}
+
+input CreateAsignaturaInput {
+  creditos: Int
+  nombre: String
+}
+
+input CreateCursoInput {
+  asignatura_id: Int
+  profesor_id: Int
+}
+
+input CreateDecanoInput {
+  apellido: String
+  nombre: String
+}
+
+input CreateEstudianteInput {
+  APELLIDO: String
+  DIRECCION: String
+  NOMBRE: String
+}
+
+input CreateFacultadInput {
+  Decano_id: Int
+  nombre: String
+  ubicacion: String
+}
+
+input CreateMatriculaInput {
+  ASIGNATURA_ID: Int
+  ESTUDIANTE_ID: Int
+}
+
+input CreateProfesorInput {
+  APELLIDO: String
+  FACULTAD_ID: Int
+  NOMBRE: String
+}
+
+input DeleteAsignaturaInput {
+  id: ID!
+}
+
+input DeleteCursoInput {
+  id: ID!
+}
+
+input DeleteDecanoInput {
+  id: ID!
+}
+
+input DeleteEstudianteInput {
+  id: ID!
+}
+
+input DeleteFacultadInput {
+  id: ID!
+}
+
+input DeleteMatriculaInput {
+  id: ID!
+}
+
+input DeleteProfesorInput {
+  id: ID!
+}
+
+input TableAsignaturaFilterInput {
+  creditos: TableIntFilterInput
+  id: TableIDFilterInput
+  nombre: TableStringFilterInput
+}
+
+input TableBooleanFilterInput {
+  eq: Boolean
+  ne: Boolean
+}
+
+input TableCursoFilterInput {
+  asignatura_id: TableIntFilterInput
+  id: TableIDFilterInput
+  profesor_id: TableIntFilterInput
+}
+
+input TableDecanoFilterInput {
+  apellido: TableStringFilterInput
+  id: TableIDFilterInput
+  nombre: TableStringFilterInput
+}
+
+input TableEstudianteFilterInput {
+  APELLIDO: TableStringFilterInput
+  DIRECCION: TableStringFilterInput
+  NOMBRE: TableStringFilterInput
+  id: TableIDFilterInput
+}
+
+input TableFacultadFilterInput {
+  Decano_id: TableStringFilterInput
+  id: TableIDFilterInput
+  nombre: TableStringFilterInput
+  ubicacion: TableStringFilterInput
+}
+
+input TableFloatFilterInput {
+  between: [Float]
+  contains: Float
+  eq: Float
+  ge: Float
+  gt: Float
+  le: Float
+  lt: Float
+  ne: Float
+  notContains: Float
+}
+
+input TableIDFilterInput {
+  beginsWith: ID
+  between: [ID]
+  contains: ID
+  eq: ID
+  ge: ID
+  gt: ID
+  le: ID
+  lt: ID
+  ne: ID
+  notContains: ID
+}
+
+input TableIntFilterInput {
+  between: [Int]
+  contains: Int
+  eq: Int
+  ge: Int
+  gt: Int
+  le: Int
+  lt: Int
+  ne: Int
+  notContains: Int
+}
+
+input TableMatriculaFilterInput {
+  ASIGNATURA_ID: TableIntFilterInput
+  ESTUDIANTE_ID: TableIntFilterInput
+  id: TableIDFilterInput
+}
+
+input TableProfesorFilterInput {
+  APELLIDO: TableStringFilterInput
+  FACULTAD_ID: TableIntFilterInput
+  NOMBRE: TableStringFilterInput
+  id: TableIDFilterInput
+}
+
+input TableStringFilterInput {
+  beginsWith: String
+  between: [String]
+  contains: String
+  eq: String
+  ge: String
+  gt: String
+  le: String
+  lt: String
+  ne: String
+  notContains: String
+}
+
+input UpdateAsignaturaInput {
+  creditos: Int
+  id: ID!
+  nombre: String
+}
+
+input UpdateCursoInput {
+  asignatura_id: Int
+  id: ID!
+  profesor_id: Int
+}
+
+input UpdateDecanoInput {
+  apellido: String
+  id: ID!
+  nombre: String
+}
+
+input UpdateEstudianteInput {
+  APELLIDO: String
+  DIRECCION: String
+  NOMBRE: String
+  id: ID!
+}
+
+input UpdateFacultadInput {
+  Decano_id: Int
+  id: ID!
+  nombre: String
+  ubicacion: String
+}
+
+input UpdateMatriculaInput {
+  ASIGNATURA_ID: Int
+  ESTUDIANTE_ID: Int
+  id: ID!
+}
+
+input UpdateProfesorInput {
+  APELLIDO: String
+  FACULTAD_ID: Int
+  NOMBRE: String
+  id: ID!
+}

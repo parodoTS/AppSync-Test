@@ -1,0 +1,192 @@
+﻿schema {
+  query: Query
+  mutation: Mutation
+}
+
+type Consulta {
+  departamento_id: Int!
+  doctor_id: Int!
+  id: ID!
+}
+
+type Departamento {
+  id: ID!
+  nombre: String!
+}
+
+type Director {
+  apellido: String!
+  id: ID!
+  nombre: String!
+}
+
+type Doctor {
+  apellido: String!
+  hospital_id: Int!
+  id: ID!
+  nombre: String!
+}
+
+type Hospital {
+  director_id: Int!
+  id: ID!
+  nombre: String!
+  ubicacion: String!
+}
+
+type Mutation {
+  createConsulta(input: CreateConsultaInput!): Consulta
+  createDepartamento(input: CreateDepartamentoInput!): Departamento
+  createDirector(input: CreateDirectorInput!): Director
+  createDoctor(input: CreateDoctorInput!): Doctor
+  createHospital(input: CreateHospitalInput!): Hospital
+  createPaciente(input: CreatePacienteInput!): Paciente
+  createTratamiento(input: CreateTratamientoInput!): Tratamiento
+  deleteConsulta(input: DeleteConsultaInput!): String
+  deleteDepartamento(input: DeleteDepartamentoInput!): String
+  deleteDirector(input: DeleteDirectorInput!): String
+  deleteDoctor(input: DeleteDoctorInput!): String
+  deleteHospital(input: DeleteHospitalInput!): String
+  deletePaciente(input: DeletePacienteInput!): String
+  deleteTratamiento(input: DeleteTratamientoInput!): String
+  updateConsulta(input: UpdateConsultaInput!): Consulta
+  updateDepartamento(input: UpdateDepartamentoInput!): Departamento
+  updateDirector(input: UpdateDirectorInput!): Director
+  updateDoctor(input: UpdateDoctorInput!): Doctor
+  updateHospital(input: UpdateHospitalInput!): Hospital
+  updatePaciente(input: UpdatePacienteInput!): Paciente
+  updateTratamiento(input: UpdateTratamientoInput!): Tratamiento
+}
+
+type Paciente {
+  apellido: String!
+  direccion: String!
+  id: ID!
+  nombre: String!
+}
+
+type Query {
+  getConsulta(id: ID!): Consulta
+  getDepartamento(id: ID!): Departamento
+  #      # Get a single value by primary key.
+  getDirector(id: ID!): Director
+  getDoctor(id: ID!): Doctor
+  getHospital(id: ID!): Hospital
+  getPaciente(id: ID!): Paciente
+  getTratamiento(id: ID!): Tratamiento
+}
+
+type Tratamiento {
+  departamento_id: Int!
+  id: ID!
+  paciente_id: Int!
+}
+
+input CreateConsultaInput {
+  departamento_id: Int
+  doctor_id: Int
+}
+
+input CreateDepartamentoInput {
+  nombre: String
+}
+
+input CreateDirectorInput {
+  apellido: String
+  nombre: String
+}
+
+input CreateDoctorInput {
+  apellido: String
+  hospital_id: String
+  nombre: String
+}
+
+input CreateHospitalInput {
+  director_id: Int
+  nombre: String
+  ubicacion: String
+}
+
+input CreatePacienteInput {
+  apellido: String
+  nombre: String
+  ubicacion: String
+}
+
+input CreateTratamientoInput {
+  departamento_id: Int
+  paciente_id: Int
+}
+
+input DeleteConsultaInput {
+  id: ID!
+}
+
+input DeleteDepartamentoInput {
+  id: ID!
+}
+
+input DeleteDirectorInput {
+  id: ID!
+}
+
+input DeleteDoctorInput {
+  id: ID!
+}
+
+input DeleteHospitalInput {
+  id: ID!
+}
+
+input DeletePacienteInput {
+  id: ID!
+}
+
+input DeleteTratamientoInput {
+  id: ID!
+}
+
+input UpdateConsultaInput {
+  departamento_id: Int!
+  doctor_id: Int!
+  id: ID!
+}
+
+input UpdateDepartamentoInput {
+  id: ID!
+  nombre: String!
+}
+
+input UpdateDirectorInput {
+  apellido: String!
+  id: ID!
+  nombre: String!
+}
+
+input UpdateDoctorInput {
+  apellido: String!
+  hospital_id: Int!
+  id: ID!
+  nombre: String!
+}
+
+input UpdateHospitalInput {
+  director_id: Int!
+  id: ID!
+  nombre: String!
+  ubicacion: String!
+}
+
+input UpdatePacienteInput {
+  apellido: String!
+  direccion: String!
+  id: ID!
+  nombre: String!
+}
+
+input UpdateTratamientoInput {
+  departamento_id: Int!
+  id: ID!
+  paciente_id: Int!
+}
